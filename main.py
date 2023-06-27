@@ -7,6 +7,8 @@ from urllib.request import urlopen
 import json
 import seaborn as sns
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+
 # Load some data
 df = pd.read_csv('renewable_power_plants_CH.csv')
 
@@ -18,8 +20,7 @@ st.header("Data Exploration")
 if st.checkbox("Show Dataframe"):
     st.header("This is my dataset:")
     st.dataframe(df)
-    # st.table(data=iris)
-    # st.write(data=iris)
+
 
 # Visualize the data
 if st.checkbox("Show Bar Plot"):
@@ -35,6 +36,9 @@ if st.checkbox("Show Pie Chart"):
     df['energy_source_level_2_grouped'] = df['energy_source_level_2'].replace(to_remove, 'Other')
     fig = px.pie(df, names='energy_source_level_2_grouped', title='Distribution of Energy Sources')
     st.plotly_chart(fig)
+
+    fig = px.pie(df, names='energy_source_level_1', title='Distribution of Energy Sources_level_1')
+    fig.show()
 
 
 if st.checkbox("Show Heatmap"):
