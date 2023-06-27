@@ -40,8 +40,11 @@ if st.checkbox("Show Pie Chart"):
 if st.checkbox("Show Heatmap"):
     st.header("Heatmap")
     plt.figure(figsize=(10,8))
-    sns.heatmap(df.corr(), annot=True, cmap='coolwarm')
+    # Select only numerical columns
+    numerical_df = df.select_dtypes(include=['float64', 'int64'])
+    sns.heatmap(numerical_df.corr(), annot=True, cmap='coolwarm')
     st.pyplot()
+
 
 if st.checkbox("Show Scatter Plot"):
     st.header("Scatter Plot")
