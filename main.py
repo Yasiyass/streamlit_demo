@@ -36,9 +36,11 @@ if st.sidebar.checkbox("Show Pie Chart"):
         # Group less frequent categories into 'Other'
         value_counts = df['energy_source_level_2'].value_counts()
         to_remove = value_counts[value_counts <= 10].index
-        df['energy_source_level_2_grouped'] = df['energy_source_level_2'].replace(to_remove, 'Other')
-        fig = px.pie(df, names='energy_source_level_2_grouped', title='Distribution of Energy Sources')
+        df_copy = df.copy()
+        df_copy['energy_source_level_2_grouped'] = df_copy['energy_source_level_2'].replace(to_remove, 'Other')
+        fig = px.pie(df_copy, names='energy_source_level_2_grouped', title='Distribution of Energy Sources')
         st.plotly_chart(fig)
+
 
 if st.sidebar.checkbox("Show Heatmap"):
     with st.spinner('Generating Heatmap...'):
